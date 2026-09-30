@@ -12,7 +12,14 @@ public class PauseMenu : MonoBehaviour
     // while the pause overlay is up, and so a touch on the pause button
     // itself is never also treated as a bunny-hop tap.
     public static bool IsPaused { get; private set; }
-    public static Rect PauseButtonRect => new Rect(24f, 24f, 60f, 60f);
+    public static Rect PauseButtonRect
+    {
+        get
+        {
+            float size = MobileControls.IsMobile ? 88f : 60f;
+            return new Rect(24f, 24f, size, size);
+        }
+    }
 
     bool paused = false;
 
@@ -67,7 +74,7 @@ public class PauseMenu : MonoBehaviour
             SetPaused(true);
         }
 
-        float iconSize = 22f;
+        float iconSize = rect.width * (22f / 60f);
         Rect iconRect = new Rect(rect.x + (rect.width - iconSize) / 2f, rect.y + (rect.height - iconSize) / 2f, iconSize, iconSize);
         GUI.DrawTexture(iconRect, pauseIconTex, ScaleMode.ScaleToFit, true);
     }
@@ -178,15 +185,19 @@ public class PauseMenu : MonoBehaviour
 
     void BuildStyles()
     {
+        // No border/9-slice here (unlike the other styles below) - circleTex
+        // is a true circle (radius = half its width), and the pause button
+        // is always drawn into a square Rect, so a plain uniform stretch
+        // keeps it perfectly round at any size instead of the flat "stadium"
+        // sides 9-slicing would introduce once the Rect grows past the
+        // texture's native 64px.
         pauseButtonStyle = new GUIStyle();
         pauseButtonStyle.normal.background = circleTex;
         pauseButtonStyle.hover.background = circleHoverTex;
         pauseButtonStyle.active.background = circleHoverTex;
-        pauseButtonStyle.border = new RectOffset(30, 30, 30, 30);
 
         circleShadowStyle = new GUIStyle();
         circleShadowStyle.normal.background = circleShadowTex;
-        circleShadowStyle.border = new RectOffset(30, 30, 30, 30);
 
         titleStyle = new GUIStyle();
         titleStyle.fontSize = 44;

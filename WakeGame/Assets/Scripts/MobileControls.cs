@@ -114,8 +114,8 @@ public class MobileControls : MonoBehaviour
 
     void LayoutSticks()
     {
-        float radius = Mathf.Clamp(UnityEngine.Screen.height * 0.11f, 64f, 110f);
-        float margin = radius * 1.3f;
+        float radius = Mathf.Clamp(UnityEngine.Screen.height * 0.125f, 74f, 125f);
+        float margin = radius * 1.55f;
 
         steerStick.radius = radius;
         steerStick.center = new Vector2(margin, UnityEngine.Screen.height - margin);
