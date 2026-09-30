@@ -28,18 +28,15 @@ The entire scene is generated procedurally in code at startup (GameBootstrap.cs)
 
 ### Installation
 
-1. Clone the repository:
-   ```
-   git clone <repo-url>
-   ```
-2. Open Unity Hub and add the `WakeGame` folder as a project.
+1. Clone the repository
+2. Open Unity Hub and add the `WakeZone` folder as a project.
 3. Open the project, then open the `WakeboardScene` scene (`Assets/Scenes/WakeboardScene.unity`).
 4. Press Play in the Unity editor.
 
 ## Project Structure
 
 ```
-WakeGame/
+WakeZone/
 ├── Assets/
 │   ├── Scenes/          # Main scene (WakeboardScene)
 │   └── Scripts/         # Gameplay, physics, and rendering scripts
