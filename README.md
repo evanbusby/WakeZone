@@ -48,6 +48,7 @@ Key scripts:
 
 - `GameBootstrap.cs` — procedurally builds the entire scene (water, land, boat, rider, camera, lighting) on startup
 - `RiderController.cs` — rider physics: carving, wake jumps, spins, flips, and the raley trick
+- `BoatRig.cs` — loads the Yamaha boat model and positions the rope attach point
 - `BoatMover.cs` — constant-speed boat movement
 - `RopeRenderer.cs` / `WakeRenderer.cs` / `SplashEffect.cs` — visual effects for the tow rope, wake, and water spray
 - `CameraFollow.cs` — third-person camera that trails the boat
@@ -55,3 +56,7 @@ Key scripts:
 ## Author
 
 Evan Busby
+
+## Credits
+
+Boat model: "2008 212X Yamaha Wakeboard Boat" by BoatUS Foundation on Sketchfab, licensed under CC BY 4.0.

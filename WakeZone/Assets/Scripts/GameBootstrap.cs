@@ -39,16 +39,14 @@ public class GameBootstrap : MonoBehaviour
         CreateLand("LandLeft", -landCenterOffset, landHalfWidth, water.transform.position.z, water.transform.localScale.z);
         CreateLand("LandRight", landCenterOffset, landHalfWidth, water.transform.position.z, water.transform.localScale.z);
 
-        GameObject boat = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        boat.name = "Boat";
+        GameObject boat = new GameObject("Boat");
         boat.transform.position = new Vector3(0f, 0.5f, 0f);
-        boat.transform.localScale = new Vector3(1.5f, 1f, 3f);
         boat.AddComponent<BoatMover>();
-        boat.AddComponent<BoatRig>();
+        BoatRig boatRig = boat.AddComponent<BoatRig>();
 
         GameObject roosterTail = new GameObject("RoosterTail");
         roosterTail.transform.SetParent(boat.transform, false);
-        roosterTail.transform.localPosition = new Vector3(0f, -0.3f, -1.7f);
+        roosterTail.transform.localPosition = new Vector3(0f, -0.3f, -2.3f);
         SplashEffect roosterTailEffect = roosterTail.AddComponent<SplashEffect>();
         roosterTailEffect.color = new Color(0.85f, 0.92f, 1f, 0.85f);
         roosterTailEffect.startSpeed = 6f;
@@ -65,6 +63,7 @@ public class GameBootstrap : MonoBehaviour
         RiderRig riderRig = rider.AddComponent<RiderRig>();
         RiderController riderController = rider.AddComponent<RiderController>();
         riderController.boat = boat.transform;
+        riderController.towPointOffset = boatRig.RopeAnchor;
 
         GameObject boardSplash = new GameObject("BoardSplash");
         boardSplash.transform.SetParent(rider.transform, false);
@@ -82,11 +81,13 @@ public class GameBootstrap : MonoBehaviour
         GameObject wake = new GameObject("Wake");
         WakeRenderer wakeRenderer = wake.AddComponent<WakeRenderer>();
         wakeRenderer.boat = boat.transform;
+        wakeRenderer.sternZOffset = -2.0f;
 
         GameObject rope = new GameObject("Rope");
         rope.AddComponent<LineRenderer>();
         RopeRenderer ropeRenderer = rope.AddComponent<RopeRenderer>();
         ropeRenderer.boatEnd = boat.transform;
+        ropeRenderer.boatOffset = boatRig.RopeAnchor;
         ropeRenderer.riderEnd = rider.transform;
         ropeRenderer.riderOffset = riderRig.handOffset;
 
